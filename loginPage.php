@@ -1,3 +1,15 @@
+<?php
+session_start();
+require("config/commandes.php");
+
+if(isset($_SESSION['user']))
+{
+    if(!empty($_SESSION['user']))
+    {
+        header("Location: index.php");
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -17,17 +29,19 @@
             outline: 0;
             box-shadow: 0 0 0 0.15rem rgba(70, 61, 58, 0.40) !important;
         }
+        
     </style>
 </head>
 
-<body style="background-image: url('assets/img/bg.jpg');background-position: center;
+<body style="
+/* background-image: url('assets/img/bg.jpg');background-position: center; */
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;">
 
-    <section style="border-style: solid;border-color: green;  padding: 0;">
-        <div class="container-fluid my-2" style="color: rgba(255,255,255,0.50); border-style:solid; border-color: blue;  ">
-            <div class="row justify-content-center my-2 " style="border-style: solid;border-color: red;">
+    <section style=" padding: 0;">
+        <div class="container-fluid my-2" style="color: rgba(255,255,255,0.50);   ">
+            <div class="row justify-content-center my-2 " >
                 <!-- column -->
                 <div class="col-md-4 my-4">
                     <!-- card -->
@@ -45,16 +59,16 @@
                                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z">
                                     </path>
                                 </svg></div>
-                            <form class="text-center" method="post">
+                            <form class="text-center" action="config\login.php" method="post">
                                 <div class=" mb-3 "><input class="form-control" type="email" name="email" placeholder="Email" autofocus="on" autocomplete="on" inputmode="email" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" action=' ' ></div>
-                                <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" required="" minlength="7" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must be 7 or more characters"></div>
-                                <div class="mb-3" style="border-width: 0px;"><button class="btn btn-primary d-block w-100" type="submit" style="background: #8aa5ad;border-radius: 8px;border-width: 0px;border-style: none;">Login</button>
+                                <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" required="" minlength="6"  title="Password must be 7 or more characters"></div>
+                                <div class="mb-3" style="border-width: 0px;"><input class="btn btn-primary d-block w-100" type="submit" name="login" value="Login" style="background: #8aa5ad;border-radius: 8px;border-width: 0px;border-style: none;">
                                 </div>
                                 <a href="password.php">
                                     <p style="color:#463d3a ; text-decoration: underline;font-weight: bold;border: 0px none var(--bs-blue);">
                                         Forgot your password?</p>
                                 </a>
-                                <p style="color: rgb(70, 61, 58);"> Not a member?&nbsp;&nbsp;<a style="color: #463d3a;text-decoration: underline;font-weight: bold;border: 0px none var(--bs-blue);" href="RegisterPage.php">Register</a>&nbsp; </p>
+                                <p style="color: rgb(70, 61, 58);"> Not a member?<a style="color: #463d3a;text-decoration: underline;font-weight: bold;border: 0px none var(--bs-blue);" href="users\register.php">Register</a>&nbsp; </p>
                             </form>
                         </div>
                     </div>

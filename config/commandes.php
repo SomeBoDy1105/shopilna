@@ -66,10 +66,10 @@ function afficherCategory ()
 }
 
 
-function supprimerCategory($id){
+function supprimerCategory($nom){
     if (require("connection.php")) {
-        $req = $access->prepare("DELETE FROM category WHERE id = ?");
-        $req->execute(array($id));
+        $req = $access->prepare("DELETE FROM category WHERE $nom = ?");
+        $req->execute(array($nom));
         $req->closeCursor();
     }
 }
@@ -79,12 +79,12 @@ function supprimerCategory($id){
 // User
 
 // ajouter // afficher // supprimer // modifier
-function ajouterUser($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$status,$created_on){
+function ajouterUser($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$created_on){
     if (require("connection.php")) {
-        $req = $access->prepare("INSERT INTO user(nom,prenom,sexe,birthdate,email,password,role,address,phone,photo,status,created_on) VALUES($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$status,$created_on)");
-        $req->execute(array($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$status,$created_on));
-
+        $req = $access->prepare("INSERT INTO users(nom,prenom,sexe,birthdate,email,password,role,address,phone,photo,created_on) VALUES($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$created_on)");
+        $req->execute(array($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$created_on));
         $req->closeCursor();
+        return $req;
     }
 
 }
@@ -114,5 +114,25 @@ function modifierUser($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$addr
         $req->closeCursor();
     }
 }
+
+function checkAdmin($email,$password ){
+    if(require("connection.php")){
+        $req = $access->prepare("SELECT * FROM users WHERE email = ? AND password = ? AND role = 'A'");
+        $req->execute(array($email,$password));
+        if($req->rowCount() == 1){
+            
+        $data = $req->fetch(PDO::FETCH_OBJ);
+        return $data;
+    }
+    else{
+            $req->closeCursor();
+            return false;
+        }
+    }
+
+
+    }
+
+
 
 ?>
