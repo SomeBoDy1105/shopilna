@@ -1,5 +1,6 @@
 <?php
 session_start();
+// $_SESSION['user'] = null;
 require("config/commandes.php");
 
 $myProducts = afficherProducts();
@@ -39,12 +40,13 @@ function getCategoryName($categoryId)
         <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
         <script src='assets/bootstrap/js/bootstrap.min.js'></script>
         <script src='/assets/js/script.min.js'></script>
-
+        
         <style>
-        :root {
-            --bg-primary: #E2DCDE;
-            --bg-secondary: #191418;
-            --navBC: #E2DCDE;
+            :root {
+                --bg-primary: #E2DCDE;
+                --bg-secondary: #191418;
+                --navBC: #E2DCDE;
+                --bg-img: url("assets/img/subtle-prism.svg");
             /* custom */
             --sl-primary1: #3A76CD;
             --sl-primary: #8aa5ad;
@@ -59,6 +61,11 @@ function getCategoryName($categoryId)
             --bg-primary: #3C4858;
             --navBC: #191418;
             --bg-secondary: #E2DCDE;
+            --bg-img: url("assets/img/subtle-prism-Dark.svg");
+            
+        }
+        body{
+            background-image:var(--bg-img);
 
         }
 
@@ -118,10 +125,10 @@ function getCategoryName($categoryId)
                             <div class="card mb-4 box-shadow"
                                 style="background-color: var(--bg-primary); color:var(--bg-secondary); border-color:var(--bg-secondary); box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);">
                                 <i class=" text-center my-3 h3  "><?= $product->nom ?></i>
-                                <i class="mx-2"><?= getCategoryName($product->category_id) ?></i>
                                 <img class="card-img-top" style="margin:auto; display: block;cursor:pointer;"
-                                    src="<?= $product->photo ?>" width="423" height="635">
+                                src="<?= $product->photo ?>" width="423" height="635">
                                 <div class="card-body">
+                                    <i class="mx-1"><?= getCategoryName($product->category_id) ?></i>
                                     <p class="card-text"><?= $product->description ?></p>
                                     <p class="card-text"><?= $product->prix ?>.DA</p>
                                     <div class="d-flex justify-content-between align-items-center">

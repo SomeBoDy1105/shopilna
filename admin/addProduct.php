@@ -1,6 +1,27 @@
 <?php
 session_start();
 require("../config/commandes.php");
+
+
+// add product
+if (isset($_POST['add'])){
+    if(!empty($_POST['nom'])AND !empty($_POST['description'])AND !empty($_POST['marque']) AND !empty($_POST['prix']) AND !empty($_POST['photo']) AND !empty($_POST['quantity']) ){
+        $nom = htmlspecialchars($_POST['nom']);
+        $description = htmlspecialchars($_POST['description']);
+        $marque = $_POST['marque'];
+        $prix = htmlspecialchars($_POST['prix']);
+        $photo = htmlspecialchars($_POST['photo']);
+        $quantity = htmlspecialchars($_POST['quantity']);
+    }else{
+            echo "Please fill all the fields";
+        }
+        
+        
+    $addproduct= ajouterProduct($category_id, $nom,$description,$marque,$prix,$photo,$quantity);
+        
+
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -17,25 +38,9 @@ require("../config/commandes.php");
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark mb-4">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="../index.php">Shopilna</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php 
+        require("/xampp/htdocs/shopilna/assets/php/adminnavbar.php");
+        ?>
         <div class="container-fluid my-2" style="color: rgba(255,255,255,0.50);   ">
             <form class="text-center" method="post">
                
@@ -47,7 +52,7 @@ require("../config/commandes.php");
                         autocomplete="on" inputmode="text" required > </div>
                 <div class="mb-3"> <input class="form-control" type="text" name="prix" placeholder="Price"
                         autocomplete="on" inputmode="text" required > </div>
-                <div class="mb-3"><input class="form-control" type="number" name="quan" placeholder="Quantity"
+                <div class="mb-3"><input class="form-control" type="number" name="quantity" placeholder="Quantity"
                         required > </div>
                 <div class="mb-3" style="border-width: 0px;"><input class="btn btn-primary d-block w-100" type="submit"
                         value="Add"
@@ -77,33 +82,7 @@ require("../config/commandes.php");
         </div>
     </body>
     <?php
-  if (isset($_POST['add'])){
-    if(!empty($_POST['nom'])AND !empty($_POST['prenom'])AND !empty($_POST['date']) AND !empty($_POST['email']) AND !empty($_POST['password']) AND !empty($_POST['role']) ){
-        $nom = htmlspecialchars($_POST['nom']);
-        $prenom = htmlspecialchars($_POST['prenom']);
-        $sexe = $_POST['sexe'];
-        $date = htmlspecialchars($_POST['date']);
-        $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']);
-        $role = htmlspecialchars($_POST['role']);
-        $phone = htmlspecialchars($_POST['phone']);
-        $address = htmlspecialchars($_POST['address']);
-        $photo = htmlspecialchars($_POST['photo']);
-        $created_on = date("Y-m-d");
-    }else{
-            echo "Please fill all the fields";
-        }
-        
-        
-    $adduser= ajouterUser($nom,$prenom,$sexe,$date,$email,$password,$role,$address,$phone,$photo,$created_on);
-        if($adduser){
-            echo "User added successfully";
-        }else{
-            echo "Error";
-        }
-
-    }
-
+  
 ?>
 
 </html>

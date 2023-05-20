@@ -7,11 +7,11 @@ function ajouterProduct($category_id, $nom,$description,$marque,$prix,$photo,$qu
     if (require("connection.php")) {
         $req = $access->prepare("INSERT INTO products(category_id,nom,description,marque,prix,photo,quantity) VALUES($category_id, $nom,$description,$marque,$prix,$photo)");
         $req->execute(array($category_id, $nom,$description,$marque,$prix,$photo,$quantity));
-
         $req->closeCursor();
     }
 
 }
+
 
 function afficherProducts ()
 {
@@ -84,7 +84,6 @@ function ajouterUser($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$addre
         $req = $access->prepare("INSERT INTO users(nom,prenom,sexe,birthdate,email,password,role,address,phone,photo,created_on) VALUES($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$created_on)");
         $req->execute(array($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$created_on));
         $req->closeCursor();
-        return $req;
     }
 
 }
@@ -115,15 +114,17 @@ function modifierUser($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$addr
     }
 }
 
-function checkAdmin($email,$password ){
+function checkUser($email,$password ){
     if(require("connection.php")){
-        $req = $access->prepare("SELECT * FROM users WHERE email = ? AND password = ? AND role = 'A'");
+        $req = $access->prepare("SELECT * FROM users WHERE email = ? AND password = ?;");
         $req->execute(array($email,$password));
         if($req->rowCount() == 1){
             
         $data = $req->fetch(PDO::FETCH_OBJ);
+        
         return $data;
     }
+
     else{
             $req->closeCursor();
             return false;
@@ -131,6 +132,20 @@ function checkAdmin($email,$password ){
     }
 
 
+    }
+
+    function checkAdmin($email,$password){
+        if(require("connection.php")){
+        $req = $access->prepare("SELECT * FROM users WHERE email = ? AND password = ? AND role= 'A';");
+        $req->execute(array($email,$password));
+        $data = $req->fetch(PDO::FETCH_OBJ);
+        if($req->rowCount() == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     }
 
 

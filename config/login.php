@@ -1,31 +1,40 @@
 <?php
 require("commandes.php");
 
-if(isset($_POST['login']))
-{
-    if(!empty($_POST['email']) AND !empty($_POST['password']))
-    {
-        $email = htmlspecialchars(strip_tags($_POST['email'])) ;
+if (isset($_POST['login'])) {
+    if (!empty($_POST['email']) and !empty($_POST['password'])) {
+        $email = htmlspecialchars(strip_tags($_POST['email']));
         $password = htmlspecialchars(strip_tags($_POST['password']));
-        
+
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $admin = checkAdmin($email, $password);
-            if($admin){
-                $_SESSION['user'] = $admin;
-                header('Location:admin/');
-            }else{
-                header('Location:index.php');
-                
+            $user = checkUser($email, $password);
+            if ($user != false) {
+                $_SESSION['id'] = $user->id;
+                $_SESSION['nom'] = $user->nom;
+                $_SESSION['prenom'] = $user->prenom;
+                $_SESSION['sexe'] = $user->sexe;
+                $_SESSION['birthdate'] = $user->birthdate;
+                $_SESSION['email'] = $user->email;
+                $_SESSION['password'] = $user->password;
+                $_SESSION['role'] = $user->role;
+                $_SESSION['address'] = $user->address;
+                $_SESSION['phone'] = $user->phone;
+                $_SESSION['photo'] = $user->photo;
+                $_SESSION['status'] = $user->status;
+                if ($user->role == 'A') {
+                    header('Location:../admin/addUser.php');
+                } else if ($user->role == 'U'){
+                    header('Location:../index.php');
+                }
+            } else {
+                echo "<script>alert('Error loggin in')</script>";
             }
         } else {
-            header('Location:index.php');
-        }   
-    }else{
-        header('Location:index.php');
+            header('Location:../index.php');
+        }
+    } else {
+        header('Location:../index.php');
     }
-
+} else {
+    echo "Please fill all the fields";
 }
-
-
-
-?>

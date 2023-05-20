@@ -1,12 +1,12 @@
 <?php
 // session_start();
-require_once "config/commandes.php";
+require_once "/xampp/htdocs/shopilna/config/commandes.php";
 $myCategories = afficherCategory();
 
 ?>
 
 <nav class="navbar navbar-light navbar-expand-md sticky-top" style="background: var(--navBC); border-bottom: 1px solid; border-width:1px;">
-    <div class="container-fluid"><a class="navbar-brand" href="index.php"
+    <div class="container-fluid"><a class="navbar-brand" href="../index.php"
             style="padding-left: 0px;margin-left: 26px;margin-right: 56px; color: var(--bg-secondary); "><strong>Shopilna</strong></a><button
             data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
                 class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -40,7 +40,7 @@ $myCategories = afficherCategory();
             <a class="btn active d-xl-flex align-content-center  justify-content-xl-center align-items-xl-center"
                 role="button"
                 style="margin-left: 16px;padding: 6px 8px 6px 8px;margin-right: 34px;padding-left: 12px;padding-right: 16px; background-color :#30A78B; border-color :#30A78B;"
-                href="ProfilePage.php"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                href="loginPage.php"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                     fill="currentColor" viewBox="0 0 16 16"
                     class="bi bi-person d-xl-flex align-items-center justify-content-xl-center align-items-xl-center"
                     style="margin-right: 8px;font-size: 22px;margin-top: 0px;">

@@ -17,25 +17,9 @@ require("../config/commandes.php");
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark mb-4">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="../index.php">Shopilna</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php
+        require("/xampp/htdocs/shopilna/assets/php/adminnavbar.php");
+        ?>
         <div class="container-fluid my-2" style="color: rgba(255,255,255,0.50);   ">
             <form class="text-center" method="post">
                 <!-- <div class="column" style="border-style:solid; border-color:red;"> -->
@@ -91,6 +75,7 @@ require("../config/commandes.php");
                 <p class="card-text"><?= $user-> role ?></p>
                 <p class="card-text"><?= $user-> created_on ?></p>
             </div>
+            <hr>
             <?php
     }
     ?>
@@ -117,11 +102,7 @@ require("../config/commandes.php");
         
         
     $adduser= ajouterUser($nom,$prenom,$sexe,$date,$email,$password,$role,$address,$phone,$photo,$created_on);
-        if($adduser){
-            echo "User added successfully";
-        }else{
-            echo "Error";
-        }
+        
 
     }
 
