@@ -48,7 +48,7 @@ require("../config/commandes.php");
                 <div class="mb-3"> <input class="form-control" type="text" name="prix" placeholder="Price"
                         autocomplete="on" inputmode="text" required > </div>
                 <div class="mb-3"><input class="form-control" type="number" name="quan" placeholder="Quantity"
-                        required </div>
+                        required > </div>
                 <div class="mb-3" style="border-width: 0px;"><input class="btn btn-primary d-block w-100" type="submit"
                         value="Add"
                         style="background: #8aa5ad;border-radius: 8px;border-width: 0px;border-style: none;">
