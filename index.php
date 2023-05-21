@@ -107,8 +107,8 @@ function getCategoryName($categoryId)
                     <h1 class="jumbotron-heading">Welcome To Shopilna</h1>
                     <p class="lead text-muted">This is a online shop for the algerian people !</p>
                     <?php
-                if (isset($_SESSION['user'])) {
-                    echo '<p><a href="LoginPage.php" class="btn btn-primary my-2 myButton " >Login!</a> <a href="/users/register.php" class="btn btn-secondary my-2 " >Join Us</a> </p>';
+                if (!isset($_SESSION['user'])) {
+                    echo '<p><a href="LoginPage.php" class="btn btn-primary my-2 myButton " >Login!</a> <a href="users/register.php" class="btn btn-secondary my-2 " >Join Us</a> </p>';
                 }
                 ?>
                 </div>

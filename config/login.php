@@ -6,31 +6,29 @@ if (isset($_POST['login'])) {
         $email = htmlspecialchars(strip_tags($_POST['email']));
         $password = htmlspecialchars(strip_tags($_POST['password']));
 
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $user = checkUser($email, $password);
-            if ($user != false) {
-                $_SESSION['id'] = $user->id;
-                $_SESSION['nom'] = $user->nom;
-                $_SESSION['prenom'] = $user->prenom;
-                $_SESSION['sexe'] = $user->sexe;
-                $_SESSION['birthdate'] = $user->birthdate;
-                $_SESSION['email'] = $user->email;
-                $_SESSION['password'] = $user->password;
-                $_SESSION['role'] = $user->role;
-                $_SESSION['address'] = $user->address;
-                $_SESSION['phone'] = $user->phone;
-                $_SESSION['photo'] = $user->photo;
-                $_SESSION['status'] = $user->status;
-                if ($user->role == 'A') {
-                    header('Location:../admin/addUser.php');
-                } else if ($user->role == 'U'){
-                    header('Location:../index.php');
-                }
-            } else {
-                echo "<script>alert('Error loggin in')</script>";
+
+        $user = checkUser($email, $password);
+        if ($user != false) {
+            $_SESSION['id'] = $user->id;
+            $_SESSION['nom'] = $user->nom;
+            $_SESSION['prenom'] = $user->prenom;
+            $_SESSION['sexe'] = $user->sexe;
+            $_SESSION['birthdate'] = $user->birthdate;
+            $_SESSION['email'] = $user->email;
+            $_SESSION['password'] = $user->password;
+            $_SESSION['role'] = $user->role;
+            $_SESSION['address'] = $user->address;
+            $_SESSION['phone'] = $user->phone;
+            $_SESSION['photo'] = $user->photo;
+            $_SESSION['status'] = $user->status;
+            echo "<script>alert('Welcome ')</script>";
+            if ($user->role == 'A' or $user->role == 'a') {
+                header('Location:../admin/addUser.php');
+            } else if ($user->role == 'U' or $user->role == 'u') {
+                header('Location:../index.php');
             }
         } else {
-            header('Location:../index.php');
+            echo "<script>alert('email or password incorrect')</script>";
         }
     } else {
         header('Location:../index.php');

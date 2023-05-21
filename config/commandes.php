@@ -3,17 +3,36 @@
 
 // Product
 // ajouter // afficher // supprimer // modifier
-function ajouterProduct($category_id, $nom,$description,$marque,$prix,$photo,$quantity){
+function ajouterProduct($category_id, $nom, $description, $marque, $prix, $photo, $quantity)
+{
     if (require("connection.php")) {
-        $req = $access->prepare("INSERT INTO products(category_id,nom,description,marque,prix,photo,quantity) VALUES($category_id, $nom,$description,$marque,$prix,$photo)");
-        $req->execute(array($category_id, $nom,$description,$marque,$prix,$photo,$quantity));
+        $req = $access->prepare("INSERT INTO products(category_id,nom,description,marque,prix,photo,quantity) VALUES(?,?,?,?,?,?,?)");
+        $req->execute(array($category_id, $nom, $description, $marque, $prix, $photo, $quantity));
         $req->closeCursor();
+        return $access->lastInsertId();
     }
-
 }
 
+function getPid($nom, $Marque, $prix)
+{
+    if (require("connection.php")) {
 
-function afficherProducts ()
+        $req = $access->prepare("SELECT * FROM products WHERE nom =?,Marque =?,prix=? ");
+        $req->execute();
+        $req->execute(array($nom, $Marque, $prix));
+        if ($req->rowCount() == 1) {
+
+            $data = $req->fetch(PDO::FETCH_OBJ);
+
+            return $data->id;
+        } else {
+            $req->closeCursor();
+            return false;
+        }
+    }
+}
+
+function afficherProducts()
 {
     if (require("connection.php")) {
         $req = $access->prepare("SELECT * FROM products ORDER BY id DESC ");
@@ -24,7 +43,8 @@ function afficherProducts ()
     }
 }
 
-function supprimerProduct($id){
+function supprimerProduct($id)
+{
     if (require("connection.php")) {
         $req = $access->prepare("DELETE FROM products WHERE id = ?");
         $req->execute(array($id));
@@ -32,29 +52,63 @@ function supprimerProduct($id){
     }
 }
 
-function modifierProduct($id,$category_id, $nom,$description,$marque,$prix,$photo,$quantity){
+function modifierProduct($id, $category_id, $nom, $description, $Marque, $prix, $photo, $quantity)
+{
     if (require("connection.php")) {
-        $req = $access->prepare("UPDATE products SET nom = ?, description = ?, prix = ?,marque=?, photo = ?, quantity= ? WHERE id = ?");
-        $req->execute(array($category_id, $nom,$description,$marque,$prix,$photo, $quantity,$id));
+        $req = $access->prepare("UPDATE products SET nom = ?, description = ?, prix = ?,Marque=?, photo = ?, quantity= ? WHERE id = ?");
+        $req->execute(array($category_id, $nom, $description, $Marque, $prix, $photo, $quantity, $id));
         $req->closeCursor();
+    }
+}
+
+function checkProduct($nom, $Marque, $prix)
+{
+    if (require("connection.php")) {
+        $req = $access->prepare("SELECT * FROM products WHERE nom = ? AND Marque = ? AND prix =?;");
+        $req->execute(array($nom, $Marque, $prix));
+        if ($req->rowCount() == 1) {
+
+            $data = $req->fetch(PDO::FETCH_OBJ);
+
+            return $data;
+        } else {
+            $req->closeCursor();
+            return false;
+        }
     }
 }
 
 // Category
 
 
-// ajouter // afficher // supprimer // modifier
-function ajouterCategory($nom,$description){
+// ajouter // afficher // supprimer // modifier // check
+function ajouterCategory($nom, $description)
+{
     if (require("connection.php")) {
         $req = $access->prepare("INSERT INTO category(nom,description) VALUES($nom,$description)");
-        $req->execute(array($nom,$description));
-
+        $req->execute(array($nom, $description));
         $req->closeCursor();
+        return $access->lastInsertId();
     }
-
 }
+function getCid($nom, $Marque, $prix)
+{
+    if (require("connection.php")) {
 
-function afficherCategory ()
+        $req = $access->prepare("SELECT * FROM category WHERE nom =?");
+        $req->execute(array($nom));
+        if ($req->rowCount() == 1) {
+
+            $data = $req->fetch(PDO::FETCH_OBJ);
+
+            return $data->id;
+        } else {
+            $req->closeCursor();
+            return false;
+        }
+    }
+}
+function afficherCategory()
 {
     if (require("connection.php")) {
         $req = $access->prepare("SELECT * FROM category ORDER BY id");
@@ -66,7 +120,8 @@ function afficherCategory ()
 }
 
 
-function supprimerCategory($nom){
+function supprimerCategory($nom)
+{
     if (require("connection.php")) {
         $req = $access->prepare("DELETE FROM category WHERE $nom = ?");
         $req->execute(array($nom));
@@ -74,23 +129,62 @@ function supprimerCategory($nom){
     }
 }
 
+function modifierCategory($id, $nom, $description)
+{
+    if (require("connection.php")) {
+        $req = $access->prepare("UPDATE category SET nom = ?, description = ? WHERE id = ?");
+        $req->execute(array($nom, $description, $id));
+        $req->closeCursor();
+    }
+}
+
+// check
+function checkCategory($nom)
+{
+    if (require("connection.php")) {
+        $req = $access->prepare("SELECT * FROM category WHERE nom = ?");
+        $req->execute(array($nom));
+        $data = $req->fetch(PDO::FETCH_OBJ);
+        $req->closeCursor();
+        return $data;
+    }
+}
 
 
 // User
 
 // ajouter // afficher // supprimer // modifier
-function ajouterUser($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$created_on){
-    if (require("connection.php")) {
-        $req = $access->prepare("INSERT INTO users(nom,prenom,sexe,birthdate,email,password,role,address,phone,photo,created_on) VALUES($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$created_on)");
-        $req->execute(array($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$created_on));
-        $req->closeCursor();
-    }
-
-}
-function afficherUser ()
+function ajouterUser($nom, $prenom, $sexe, $birthdate, $email, $password, $role, $address, $phone, $photo, $created_on)
 {
     if (require("connection.php")) {
-        $req = $access->prepare("SELECT * FROM users ORDER BY id DESC");
+        $req = $access->prepare("INSERT INTO users(nom,prenom,sexe,birthdate,email,password,role,address,phone,photo,created_on) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+        $req->execute(array($nom, $prenom, $sexe, $birthdate, $email, $password, $role, $address, $phone, $photo, $created_on));
+        $req->closeCursor();
+        return $access->lastInsertId();
+    }
+}
+
+function getUid($nom, $prenom, $email)
+{
+    if (require("connection.php")) {
+
+        $req = $access->prepare("SELECT * FROM users WHERE nom =? AND prenom=? AND email =?");
+        $req->execute(array($nom, $prenom, $email));
+        if ($req->rowCount() == 1) {
+
+            $data = $req->fetch(PDO::FETCH_OBJ);
+
+            return ($data->id);
+        } else {
+            $req->closeCursor();
+            return false;
+        }
+    }
+}
+function afficherUser()
+{
+    if (require("connection.php")) {
+        $req = $access->prepare("SELECT * FROM users ORDER BY id ");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_OBJ);
         $req->closeCursor();
@@ -98,7 +192,8 @@ function afficherUser ()
     }
 }
 
-function supprimerUser($id){
+function supprimerUser($id)
+{
     if (require("connection.php")) {
         $req = $access->prepare("DELETE FROM users WHERE id = ?");
         $req->execute(array($id));
@@ -106,48 +201,42 @@ function supprimerUser($id){
     }
 }
 
-function modifierUser($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$status){
+function modifierUser($nom, $prenom, $sexe, $birthdate, $email, $password, $role, $address, $phone, $photo)
+{
     if (require("connection.php")) {
-        $req = $access->prepare("UPDATE user SET nom = ?, prenom = ?, sexe = ?,birthdate=?,email = ?, password = ?, role = ?, address = ?, phone = ?, photo = ?, status= ? WHERE id = ?");
-        $req->execute(array($nom,$prenom,$sexe,$birthdate,$email,$password,$role,$address,$phone,$photo,$status));
+        $req = $access->prepare("UPDATE users SET nom = ?, prenom = ?, sexe = ?,birthdate=?,email = ?, password = ?, role = ?, address = ?, phone = ?, photo = ? WHERE id = ?");
+        $req->execute(array($nom, $prenom, $sexe, $birthdate, $email, $password, $role, $address, $phone, $photo));
         $req->closeCursor();
     }
 }
 
-function checkUser($email,$password ){
-    if(require("connection.php")){
+function checkUser($email, $password)
+{
+    if (require("connection.php")) {
         $req = $access->prepare("SELECT * FROM users WHERE email = ? AND password = ?;");
-        $req->execute(array($email,$password));
-        if($req->rowCount() == 1){
-            
-        $data = $req->fetch(PDO::FETCH_OBJ);
-        
-        return $data;
-    }
+        $req->execute(array($email, $password));
+        if ($req->rowCount() == 1) {
 
-    else{
+            $data = $req->fetch(PDO::FETCH_OBJ);
+
+            return $data;
+        } else {
             $req->closeCursor();
             return false;
         }
     }
+}
 
-
-    }
-
-    function checkAdmin($email,$password){
-        if(require("connection.php")){
+function checkAdmin($email, $password)
+{
+    if (require("connection.php")) {
         $req = $access->prepare("SELECT * FROM users WHERE email = ? AND password = ? AND role= 'A';");
-        $req->execute(array($email,$password));
+        $req->execute(array($email, $password));
         $data = $req->fetch(PDO::FETCH_OBJ);
-        if($req->rowCount() == 1){
+        if ($req->rowCount() == 1) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
-    }
-
-
-
-?>
+}

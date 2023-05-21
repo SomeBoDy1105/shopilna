@@ -3,10 +3,11 @@
 require_once "/xampp/htdocs/shopilna/config/commandes.php";
 $myCategories = afficherCategory();
 
+    echo "<script>  alert('".$_SESSION['user']."'); </script>";
 ?>
 
 <nav class="navbar navbar-light navbar-expand-md sticky-top" style="background: var(--navBC); border-bottom: 1px solid; border-width:1px;">
-    <div class="container-fluid"><a class="navbar-brand" href="../index.php"
+    <div class="container-fluid"><a class="navbar-brand" href="index.php"
             style="padding-left: 0px;margin-left: 26px;margin-right: 56px; color: var(--bg-secondary); "><strong>Shopilna</strong></a><button
             data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
                 class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -25,7 +26,6 @@ $myCategories = afficherCategory();
                     </div>
                 </li>
                     </div>
-                </li>
             </ul><a class="btn active d-xl-flex align-content-center  justify-content-xl-center align-items-xl-center"
                 role="button" href="users/Checkout.php"
                  style="background: #181720;margin-right: 4px; color:white">

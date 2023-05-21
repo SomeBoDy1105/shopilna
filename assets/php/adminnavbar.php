@@ -13,11 +13,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="adduser.php">Add user</a>
                 </li>
+                
             </ul>
            <a class="btn active d-xl-flex align-content-center justify-content-xl-center align-items-xl-center"
             role="button"
             style="margin-left: 16px;padding: 6px 8px 6px 8px;margin-right: 34px;padding-left: 12px;padding-right: 16px;
-            background-color :#30A78B; border-color :#30A78B;"
+            background-color :#dc3545; border-color :#75101a;"
             href="../config\logout.php"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                 viewBox="0 0 16 16"
                 class="bi bi-person d-xl-flex align-items-center justify-content-xl-center align-items-xl-center"
