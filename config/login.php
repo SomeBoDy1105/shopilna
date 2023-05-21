@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("commandes.php");
 
 if (isset($_POST['login'])) {
@@ -29,6 +30,7 @@ if (isset($_POST['login'])) {
             }
         } else {
             echo "<script>alert('email or password incorrect')</script>";
+            header('Location ../loginPage.php');
         }
     } else {
         header('Location:../index.php');

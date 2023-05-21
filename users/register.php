@@ -7,7 +7,7 @@ if (isset($_POST['add'])) {
             $role = "u";
             $newuser = ajouterUser($_POST['nom'], $_POST['prenom'], $_POST['gender'], $_POST['date'], $_POST['email'], $_POST['password'], $role, $_POST['address'], $_POST['phone'],  $_POST['photo'],  $created_on);
             if ($newuser) {
-                echo "<script>alert('yay!You have been Registerd! Sending you now to login')</script>";
+                echo "<script>alert('YAY! You have been Registerd! Sending you now to login')</script>";
                 header("refresh:0;url=../loginPage.php");
             } else {
                 // echo "<script>alert('User not added successfully')</script>";

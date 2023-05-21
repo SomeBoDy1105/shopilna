@@ -1,5 +1,4 @@
 <?php
-session_start();
 require("../config/commandes.php");
 // add product
 if (isset($_POST['add'])) {
