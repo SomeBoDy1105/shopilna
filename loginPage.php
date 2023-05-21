@@ -2,10 +2,8 @@
 session_start();
 require("config/commandes.php");
 
-if(isset($_SESSION['user']))
-{
-    if(!empty($_SESSION['user']))
-    {
+if (isset($_SESSION['user'])) {
+    if (!empty($_SESSION['user'])) {
         header("Location: index.php");
     }
 }
@@ -22,6 +20,15 @@ if(isset($_SESSION['user']))
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <style>
+        body {
+
+            background-image: url('assets/img/subtle-prism-Dark.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
         .form-control:focus {
             color: #212529;
             background-color: #fff;
@@ -29,19 +36,14 @@ if(isset($_SESSION['user']))
             outline: 0;
             box-shadow: 0 0 0 0.15rem rgba(70, 61, 58, 0.40) !important;
         }
-        
     </style>
 </head>
 
-<body style="
-/* background-image: url('assets/img/bg.jpg');background-position: center; */
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;">
+<body>
 
     <section style=" padding: 0;">
         <div class="container-fluid my-2" style="color: rgba(255,255,255,0.50);   ">
-            <div class="row justify-content-center my-2 " >
+            <div class="row justify-content-center my-2 ">
                 <!-- column -->
                 <div class="col-md-4 my-4">
                     <!-- card -->
@@ -60,8 +62,8 @@ if(isset($_SESSION['user']))
                                     </path>
                                 </svg></div>
                             <form class="text-center" action="config\login.php" method="post">
-                                <div class=" mb-3 "><input class="form-control" type="email" name="email" placeholder="Email" autofocus="on" autocomplete="on" inputmode="email" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" action=' ' ></div>
-                                <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" required="" minlength="6"  title="Password must be 7 or more characters"></div>
+                                <div class=" mb-3 "><input class="form-control" type="email" name="email" placeholder="Email" autofocus="on" autocomplete="on" inputmode="email" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" action=' '></div>
+                                <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" required="" minlength="6" title="Password must be 7 or more characters"></div>
                                 <div class="mb-3" style="border-width: 0px;"><input class="btn btn-primary d-block w-100" type="submit" name="login" value="Login" style="background: #8aa5ad;border-radius: 8px;border-width: 0px;border-style: none;">
                                 </div>
                                 <a href="password.php">

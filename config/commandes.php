@@ -17,8 +17,7 @@ function getPid($nom, $Marque, $prix)
 {
     if (require("connection.php")) {
 
-        $req = $access->prepare("SELECT * FROM products WHERE nom =?,Marque =?,prix=? ");
-        $req->execute();
+        $req = $access->prepare("SELECT * FROM products WHERE nom =? AND Marque =? AND prix=? ");
         $req->execute(array($nom, $Marque, $prix));
         if ($req->rowCount() == 1) {
 
@@ -64,7 +63,7 @@ function modifierProduct($id, $category_id, $nom, $description, $Marque, $prix, 
 function checkProduct($nom, $Marque, $prix)
 {
     if (require("connection.php")) {
-        $req = $access->prepare("SELECT * FROM products WHERE nom = ? AND Marque = ? AND prix =?;");
+        $req = $access->prepare("SELECT * FROM products WHERE nom = ? AND Marque = ? AND prix =?");
         $req->execute(array($nom, $Marque, $prix));
         if ($req->rowCount() == 1) {
 
@@ -85,13 +84,13 @@ function checkProduct($nom, $Marque, $prix)
 function ajouterCategory($nom, $description)
 {
     if (require("connection.php")) {
-        $req = $access->prepare("INSERT INTO category(nom,description) VALUES($nom,$description)");
+        $req = $access->prepare("INSERT INTO category(nom,description) VALUES(?,?)");
         $req->execute(array($nom, $description));
         $req->closeCursor();
         return $access->lastInsertId();
     }
 }
-function getCid($nom, $Marque, $prix)
+function getCid($nom)
 {
     if (require("connection.php")) {
 
@@ -120,11 +119,11 @@ function afficherCategory()
 }
 
 
-function supprimerCategory($nom)
+function supprimerCategory($id)
 {
     if (require("connection.php")) {
-        $req = $access->prepare("DELETE FROM category WHERE $nom = ?");
-        $req->execute(array($nom));
+        $req = $access->prepare("DELETE FROM category WHERE id = ?");
+        $req->execute(array($id));
         $req->closeCursor();
     }
 }
@@ -139,11 +138,11 @@ function modifierCategory($id, $nom, $description)
 }
 
 // check
-function checkCategory($nom)
+function checkCategory($nom,$description)
 {
     if (require("connection.php")) {
-        $req = $access->prepare("SELECT * FROM category WHERE nom = ?");
-        $req->execute(array($nom));
+        $req = $access->prepare("SELECT * FROM category WHERE nom = ? AND description=?");
+        $req->execute(array($nom,$description));
         $data = $req->fetch(PDO::FETCH_OBJ);
         $req->closeCursor();
         return $data;

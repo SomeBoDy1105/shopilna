@@ -7,7 +7,9 @@ if (isset($_POST['add'])) {
     if (!empty($_POST['nom']) and !empty($_POST['prenom']) and !empty($_POST['gender']) and !empty($_POST['date']) and !empty($_POST['email']) and !empty($_POST['password']) and !empty($_POST['address']) and !empty($_POST['phone']))
         if (!checkUser($_POST['email'], $_POST['password'])) {
             $created_on = date("Y-m-d");
-            $newuser = ajouterUser($_POST['nom'], $_POST['prenom'], $_POST['gender'], $_POST['date'], $_POST['email'], $_POST['password'], $_POST['role'], $_POST['address'], $_POST['phone'],  $_POST['photo'],  $created_on);
+            $role = strtoupper($_POST['role']);
+            $gender=strtoupper($_POST['gender']);
+            $newuser = ajouterUser($_POST['nom'], $_POST['prenom'], $gender, $_POST['date'], $_POST['email'], $_POST['password'], $role, $_POST['address'], $_POST['phone'],  $_POST['photo'],  $created_on);
             if ($newuser) {
                 echo "<script>alert('User added successfully')</script>";
             } else {
@@ -129,7 +131,7 @@ if(isset($_POST['remove'])){
                                     <form  method="POST">
                                         <input type="hidden" name="uid"
                                             value="<?= getUid($user->nom, $user->prenom, $user->email) ?>">
-                                        <input type="submit" name="remove" value="Remove">
+                                        <input class="btn btn-danger" type="submit" name="remove" value="Remove">
                                     </form>
                                 </td>
                                 <td scope="row"><?= $user->nom  ?></td>
@@ -140,7 +142,7 @@ if(isset($_POST['remove'])){
                                 <td><?= $user->phone ?></td>
                                 <td><?= $user->address ?></td>
                                 <td><?= $user->role ?></td>
-                                <td><?= $user->photo ?></td>
+                                <td><a href="<?= $user->photo ?>" target="_blank" >Click here!</a></td>
                                 <td><?= $user->created_on ?></td>
                             </tr>
                             <?php

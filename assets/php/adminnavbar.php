@@ -13,6 +13,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="adduser.php">Add user</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="addcategory.php">Add category</a>
+                </li>
                 
             </ul>
            <a class="btn active d-xl-flex align-content-center justify-content-xl-center align-items-xl-center"

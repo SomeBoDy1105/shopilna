@@ -48,7 +48,8 @@ function getCategoryName($categoryId)
                 --navBC: #E2DCDE;
                 --bg-img: url("assets/img/subtle-prism.svg");
             /* custom */
-            --sl-primary1: #3A76CD;
+            --sl-primary1: #3C4858;
+            --s1-secondary:#E2DCDE;
             --sl-primary: #8aa5ad;
             --sl-info: #181720;
             --sl-success: #5fac6c;
@@ -58,9 +59,12 @@ function getCategoryName($categoryId)
 
         .dark-mode {
             /* --bg-primary: #191418; */
+            --sl-primary1: #E2DCDE;
+            --s1-secondary:#191418;
             --bg-primary: #3C4858;
             --navBC: #191418;
             --bg-secondary: #E2DCDE;
+
             --bg-img: url("assets/img/subtle-prism-Dark.svg");
             
         }
@@ -87,9 +91,10 @@ function getCategoryName($categoryId)
             background-color: var(--bg-primary) !important;
             color: white !important;
         }
-
+        
         .myButton {
-            background-color: var(--sl-primary1) !important;
+            background-color: var(--sl-success) !important;
+            border-color: #30A78B !important ;
             color: white !important;
         }
         </style>
@@ -122,10 +127,10 @@ function getCategoryName($categoryId)
                 background-color: var(--bg-primary); color:var(--bg-secondary);">
                         <?php foreach ($myProducts as $product) : ?>
                         <div class="col-md-4  ">
-                            <div class="card mb-4 box-shadow"
-                                style="background-color: var(--bg-primary); color:var(--bg-secondary); border-color:var(--bg-secondary); box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);">
+                            <div class="card mb-4  box-shadow"
+                                style="background-color: var(--sl-primary1); color:var(--s1-secondary); border-color:var(--bg-secondary); box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);">
                                 <i class=" text-center my-3 h3  "><?= $product->nom ?></i>
-                                <img class="card-img-top" style="margin:auto; display: block;cursor:pointer;"
+                                <img class="card-img-top mx" style="margin:auto; display: block;cursor:pointer;"
                                 src="<?= $product->photo ?>" width="423" height="635">
                                 <div class="card-body">
                                     <i class="mx-1"><?= getCategoryName($product->category_id) ?></i>

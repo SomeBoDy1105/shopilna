@@ -3,7 +3,6 @@
 require_once "/xampp/htdocs/shopilna/config/commandes.php";
 $myCategories = afficherCategory();
 
-    echo "<script>  alert('".$_SESSION['user']."'); </script>";
 ?>
 
 <nav class="navbar navbar-light navbar-expand-md sticky-top" style="background: var(--navBC); border-bottom: 1px solid; border-width:1px;">
@@ -39,7 +38,7 @@ $myCategories = afficherCategory();
                     class="d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center">Cart</span></a>
             <a class="btn active d-xl-flex align-content-center  justify-content-xl-center align-items-xl-center"
                 role="button"
-                style="margin-left: 16px;padding: 6px 8px 6px 8px;margin-right: 34px;padding-left: 12px;padding-right: 16px; background-color :#30A78B; border-color :#30A78B;"
+                style="margin-left: 16px;padding: 6px 8px 6px 8px;margin-right: 34px;padding-left: 12px;padding-right: 16px; background-color :#5fac6c; border-color :#30A78B;"
                 href="loginPage.php"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                     fill="currentColor" viewBox="0 0 16 16"
                     class="bi bi-person d-xl-flex align-items-center justify-content-xl-center align-items-xl-center"
