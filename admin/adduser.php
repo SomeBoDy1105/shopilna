@@ -4,7 +4,7 @@ require("../config/commandes.php");
 if (isset($_POST['add'])) {
 
     if (!empty($_POST['nom']) and !empty($_POST['prenom']) and !empty($_POST['gender']) and !empty($_POST['date']) and !empty($_POST['email']) and !empty($_POST['password']) and !empty($_POST['address']) and !empty($_POST['phone']))
-        if (!checkUser($_POST['email'], $_POST['password'])) {
+        if (newUser($_POST['email'], $_POST['nom'], $_POST['prenom'], $_POST['date'])) {
             $created_on = date("Y-m-d");
             $role = strtoupper($_POST['role']);
             $gender=strtoupper($_POST['gender']);
