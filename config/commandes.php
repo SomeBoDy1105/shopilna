@@ -138,11 +138,11 @@ function modifierCategory($id, $nom, $description)
 }
 
 // check
-function checkCategory($nom,$description)
+function checkCategory($nom, $description)
 {
     if (require("connection.php")) {
         $req = $access->prepare("SELECT * FROM category WHERE nom = ? AND description=?");
-        $req->execute(array($nom,$description));
+        $req->execute(array($nom, $description));
         $data = $req->fetch(PDO::FETCH_OBJ);
         $req->closeCursor();
         return $data;
@@ -209,7 +209,8 @@ function modifierUser($nom, $prenom, $sexe, $birthdate, $email, $password, $role
     }
 }
 
-function newUser($email, $nom, $prenom, $date ){
+function newUser($email, $nom, $prenom, $date)
+{
     if (require("connection.php")) {
         $req = $access->prepare("SELECT FROM users WHERE email = ? AND nom = ? AND prenom = ? AND birthdate = ?");
         $req->execute(array($email, $nom, $prenom, $date));
@@ -220,9 +221,7 @@ function newUser($email, $nom, $prenom, $date ){
             $req->closeCursor();
             return false;
         }
-
-}
-
+    }
 }
 
 
