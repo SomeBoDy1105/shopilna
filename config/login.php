@@ -11,7 +11,7 @@ if (isset($_POST['login'])) {
         $user = checkUser($email, $password);
         if ($user != false) {
             $_SESSION['id'] = $user->id;
-            $_SESSION['nom'] = $user->nom;
+            $_SESSION['user'] = $user->nom;
             $_SESSION['prenom'] = $user->prenom;
             $_SESSION['sexe'] = $user->sexe;
             $_SESSION['birthdate'] = $user->birthdate;
