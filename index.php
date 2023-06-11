@@ -36,71 +36,20 @@ function getCategoryName($categoryId)
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel='stylesheet' type='text/css' media='screen' href='assets/bootstrap/css/bootstrap.min.css'>
         <link rel='stylesheet' type='text/css' media='screen' href='assets/css/styles.min.css'>
-        <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="assets\css\custom.css">
+        <!-- custom import -->
+        <link rel="stylesheet" href="assets\css\custom.css">
+
         <script src='assets/bootstrap/js/bootstrap.min.js'></script>
         <script src='/assets/js/script.min.js'></script>
         
         <style>
-            :root {
-                --bg-primary: #E2DCDE;
-                --bg-secondary: #191418;
-                --navBC: #E2DCDE;
-                --bg-img: url("assets/img/subtle-prism.svg");
-            /* custom */
-            --sl-primary1: #3C4858;
-            --s1-secondary:#E2DCDE;
-            --sl-primary: #8aa5ad;
-            --sl-info: #181720;
-            --sl-success: #5fac6c;
-            --sl-warning: #dc9c34;
-            --sl-danger: #f44336;
-        }
 
-        .dark-mode {
-            /* --bg-primary: #191418; */
-            --sl-primary1: #E2DCDE;
-            --s1-secondary:#191418;
-            --bg-primary: #3C4858;
-            --navBC: #191418;
-            --bg-secondary: #E2DCDE;
-
-            --bg-img: url("assets/img/subtle-prism-Dark.svg");
-            
-        }
-        body{
-            background-image:var(--bg-img);
-
-        }
-
-        #icon {
-            width: 30px;
-            cursor: pointer;
-        }
-
-        .nav-link {
-            color: var(--bg-secondary) !important;
-        }
-
-        .text-muted {
-
-            color: grey !important;
-        }
-
-        .mytheme {
-            background-color: var(--bg-primary) !important;
-            color: white !important;
-        }
-        
-        .myButton {
-            background-color: var(--sl-success) !important;
-            border-color: #30A78B !important ;
-            color: white !important;
-        }
         </style>
 
     </head>
 
-    <body>
+    <body id="mybody">
 
         <?php require("assets/php/navbar.php"); ?>
 
@@ -113,6 +62,8 @@ function getCategoryName($categoryId)
                     <?php
                 if (!isset($_SESSION['user'])) {
                     echo '<p><a href="LoginPage.php" class="btn btn-primary my-2 myButton " >Login! </a> <a href="users/register.php" class="btn btn-secondary my-2 " >Join Us</a> </p>';
+                }else{
+                    echo '<p> Hello '.$_SESSION['user'].' '.$_SESSION['prenom'].' !</p>';
                 }
                 ?>
                 </div>
@@ -155,7 +106,7 @@ function getCategoryName($categoryId)
         <?php
     include("assets/php/footer.php"); ?>
 
-        <script>
+        <!-- <script>
         var icon = document.getElementById("icon");
         icon.onclick = function() {
             document.body.classList.toggle("dark-mode");
@@ -165,7 +116,7 @@ function getCategoryName($categoryId)
                 icon.src = "assets/img/moon.png";
             }
         }
-        </script>
+        </script> -->
 
     </body>
 

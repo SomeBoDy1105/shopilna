@@ -5,6 +5,10 @@ $myCategories = afficherCategory();
 
 ?>
 
+<style>
+    
+</style>
+
 <nav class="navbar navbar-light navbar-expand-md sticky-top" style="background: var(--navBC); border-bottom: 1px solid; border-width:1px;">
     <div class="container-fluid"><a class="navbar-brand" href="index.php"
             style="padding-left: 0px;margin-left: 26px;margin-right: 56px; color: var(--bg-secondary); "><strong>Shopilna</strong></a><button
@@ -24,9 +28,24 @@ $myCategories = afficherCategory();
                         <?php endforeach; ?>
                     </div>
                 </li>
-                    </div>
-            </ul><a class="btn active d-xl-flex align-content-center  justify-content-xl-center align-items-xl-center"
-                role="button" href="users/Checkout.php"
+                
+                </ul>
+                <?php 
+            if(isset($_SESSION['user'])){
+                if($_SESSION['role'] =='A'){
+                    echo  '<a class=" m-1 btn active d-xl-flex align-content-center  justify-content-xl-center align-items-xl-center"
+                    role="button"
+                    style="margin-left: 16px;padding: 6px 8px 6px 8px;margin-right: 34px;padding-left: 12px;padding-right: 16px; background-color :#dc3545; border-color :white;"
+                    href= "admin/admin.php" >Admin Panel </a> ';
+                }
+            }
+                ?>
+                
+                </div>
+                <ul class="navbar-nav flex-row justify-content-xl-end flex-wrap  ms-md-auto" style="margin-right: 0px;">
+                <li class="nav-item">
+                <a class="btn active d-xl-flex align-content-center  justify-content-xl-center align-items-xl-center"
+            role="button" href="users/Checkout.php"
                  style="background: #181720;margin-right: 4px; color:white">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16"
                     class="bi bi-cart d-xl-flex justify-content-center align-items-center align-content-center align-self-center justify-content-xl-center align-items-xl-center"
@@ -36,6 +55,8 @@ $myCategories = afficherCategory();
                     </path>
                 </svg><span
                     class="d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center">Cart</span></a>
+                </li>
+                <li class="nav-item">
             <a class="btn active d-xl-flex align-content-center  justify-content-xl-center align-items-xl-center"
                 role="button"
                 style="margin-left: 16px;padding: 6px 8px 6px 8px;margin-right: 34px;padding-left: 12px;padding-right: 16px; background-color :#5fac6c; border-color :#30A78B;"
@@ -59,8 +80,28 @@ $myCategories = afficherCategory();
                     } else {
                         echo "Login";
                     } ?>
-                    </span></a>
-                <img src="assets/img/moon.png" id="icon">
+                    </span>
+                </a>
+                </li>
+                
+                <li class="nav-item">
+                <img style="width: 30px;
+            cursor: pointer;" class="my-1" width="40" src="assets/img/moon.png" id="icon">
+                </li>
+                </ul>
         </div>
     </div>
 </nav>
+
+
+<script>
+        var icon = document.getElementById("icon");
+        icon.onclick = function() {
+            document.body.classList.toggle("dark-mode");
+            if (document.body.classList.contains("dark-mode")) {
+                icon.src = "assets/img/sun.png";
+            } else {
+                icon.src = "assets/img/moon.png";
+            }
+        }
+        </script>

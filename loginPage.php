@@ -67,10 +67,10 @@ if (isset($_SESSION['user'])) {
                                 <div class="mb-3" style="border-width: 0px;"><input class="btn btn-primary d-block w-100" type="submit" name="login" value="Login" style="background: #8aa5ad;border-radius: 8px;border-width: 0px;border-style: none;">
                                 </div>
                                 <a href="password.php">
-                                    <p style="color:#463d3a ; text-decoration: underline;font-weight: bold;border: 0px none var(--bs-blue);">
+                                    <p style="color:#463d3a ; font-weight: bold;border: 0px none var(--bs-blue);">
                                         Forgot your password?</p>
                                 </a>
-                                <p style="color: rgb(70, 61, 58);"> Not a member?<a style="color: #463d3a;text-decoration: underline;font-weight: bold;border: 0px none var(--bs-blue);" href="users\register.php">Register</a>&nbsp; </p>
+                                <p style="color: rgb(70, 61, 58);"> Not a member? <a style="color: #463d3a;font-weight: bold;border: 0px none var(--bs-blue);" href="users\register.php">Register</a>&nbsp; </p>
                             </form>
                         </div>
                     </div>

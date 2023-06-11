@@ -7,7 +7,6 @@ if (isset($_POST['login'])) {
         $email = htmlspecialchars(strip_tags($_POST['email']));
         $password = htmlspecialchars(strip_tags($_POST['password']));
 
-
         $user = checkUser($email, $password);
         if ($user != false) {
             $_SESSION['id'] = $user->id;
@@ -22,19 +21,15 @@ if (isset($_POST['login'])) {
             $_SESSION['phone'] = $user->phone;
             $_SESSION['photo'] = $user->photo;
             $_SESSION['status'] = $user->status;
-            echo "<script>alert('Welcome ')</script>";
-            if ($user->role == 'A' or $user->role == 'a') {
-                header('Location:../admin/addUser.php');
-            } else if ($user->role == 'U' or $user->role == 'u') {
-                header('Location:../index.php');
+            if ($user->role == 'A') {
+                header('Location: ../admin/admin.php');
+            } else if ($user->role == 'U') {
+                header('Location: ../index.php');
             }
         } else {
-            echo "<script>alert('email or password incorrect')</script>";
-            header('Location ../loginPage.php');
+            echo "<script>alert('Wrong email or password'); window.location.href = '../loginPage.php';</script>";
         }
     } else {
-        header('Location:../index.php');
+        echo "<script>alert('Please fill all the fields'); window.location.href = '../loginPage.php';</script>";
     }
-} else {
-    echo "Please fill all the fields";
 }

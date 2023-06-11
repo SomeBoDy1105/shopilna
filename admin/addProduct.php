@@ -56,8 +56,8 @@ if (isset($_POST['remove'])) {
                         $getcategory = afficherCategory();
                         foreach ($getcategory as $category) {
                         ?>
-                            <option value="<?= $category->id ?>"><?= $category->nom ?> // id: <?= $category->id ?>
-                            </option>
+                            <option value="<?= $category->id ?>"><?= $category->nom ?> </option>
+
                             <?php
                         }
                         ?>
@@ -73,57 +73,57 @@ if (isset($_POST['remove'])) {
                             autocomplete="on" inputmode="text" required> </div>
                     <div class="mb-3"><input class="form-control" type="number" name="quantity" placeholder="Quantity"
                             required> </div>
-                    <!-- <div class="mb-3"><input class="form-control" type="file" name="pic" > -->
-                    <div class="mb-3"> <input class="form-control" type="text" name="photo" placeholder="Photo Link"
-                            autocomplete="on" inputmode="text" required> </div>
-                    <div class="mb-3" style="border-width: 0px;"><input class="btn btn-primary d-block w-100"
-                            type="submit" value="Add" name="add"
-                            style="background: #8aa5ad;border-radius: 8px;border-width: 0px;border-style: none;">
+                    <div class="mb-3"><input class="form-control" type="file" name="pic">  </div>
+                        <div class="mb-3"> <input class="form-control" type="text" name="photo" placeholder="Photo Link"
+                                autocomplete="on" inputmode="text" required> </div>
+                        <div class="mb-3" style="border-width: 0px;"><input class="btn btn-primary d-block w-100"
+                                type="submit" value="Add" name="add"
+                                style="background: #8aa5ad;border-radius: 8px;border-width: 0px;border-style: none;">
+                        </div>
+                        </form>
                     </div>
-                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description </th>
+                                <th scope="col">Marque</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Photo link</th>
+                            </tr>
+                        </thead>
+                        <?php
+                    $getproduct = afficherProducts();
+                    foreach ($getproduct as $product) {
+                    ?>
+                        <tbody>
+                            <tr class="">
+                                <td scope="row">
+                                    <form method="POST">
+                                        <input type="hidden" name="pid"
+                                            value="<?= getPid($product->nom, $product->Marque, $product->prix) ?>">
+                                        <input class="btn btn-danger" type="submit" name="remove" value="Remove">
+                                    </form>
+                                </td>
+                                <td scope="row"><?= $product->nom ?></td>
+                                <td><?= $product->description ?></td>
+                                <td><?= $product->Marque  ?></td>
+                                <td><?= $product->prix ?></td>
+                                <td><?= $product->quantity ?></td>
+                                <td><a href="<?= $product->photo ?>" target="_blank">Click here!</a></td>
+                            </tr>
+                            <?php
+                    }
+                        ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-            <div class="table-responsive">
-                <table class="table table-primary">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Description </th>
-                            <th scope="col">Marque</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Photo link</th>
-                        </tr>
-                    </thead>
-                    <?php
-                $getproduct = afficherProducts();
-                foreach ($getproduct as $product) {
-                ?>
-                    <tbody>
-                        <tr class="">
-                            <td scope="row">
-                                <form method="POST">
-                                    <input type="hidden" name="pid"
-                                        value="<?= getPid($product->nom, $product->Marque, $product->prix) ?>">
-                                    <input class="btn btn-danger" type="submit" name="remove" value="Remove">
-                                </form>
-                            </td>
-                            <td scope="row"><?= $product->nom ?></td>
-                            <td><?= $product->description ?></td>
-                            <td><?= $product->Marque  ?></td>
-                            <td><?= $product->prix ?></td>
-                            <td><?= $product->quantity ?></td>
-                            <td><a href="<?= $product->photo ?>" target="_blank" >Click here!</a></td>
-                        </tr>
-                        <?php
-                }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </body>
 
 </html>

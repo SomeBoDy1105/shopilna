@@ -4,13 +4,14 @@ if (isset($_POST['add'])) {
     if (!empty($_POST['nom']) and !empty($_POST['prenom']) and !empty($_POST['gender']) and !empty($_POST['date']) and !empty($_POST['email']) and !empty($_POST['password']) and !empty($_POST['address']) and !empty($_POST['phone']))
         if (!checkUser($_POST['email'], $_POST['password'])) {
             $created_on = date("Y-m-d");
-            $role = "u";
-            $newuser = ajouterUser($_POST['nom'], $_POST['prenom'], $_POST['gender'], $_POST['date'], $_POST['email'], $_POST['password'], $role, $_POST['address'], $_POST['phone'],  $_POST['photo'],  $created_on);
+            $role = "U";
+            $gender = strtoupper($_POST['gender']);
+            $newuser = ajouterUser($_POST['nom'], $_POST['prenom'], $gender, $_POST['date'], $_POST['email'], $_POST['password'], $role, $_POST['address'], $_POST['phone'],  $_POST['photo'],  $created_on);
             if ($newuser) {
                 echo "<script>alert('YAY! You have been Registerd! Sending you now to login')</script>";
                 header("refresh:0;url=../loginPage.php");
             } else {
-                // echo "<script>alert('User not added successfully')</script>";
+                echo "<script>alert('User not added successfully')</script>";
             }
         } else {
             echo "<script>alert('User already exists')</script>";
@@ -38,7 +39,7 @@ if (isset($_POST['add'])) {
             background-image: url('../assets/img/subtle-prism-Dark.svg');
             background-position: center;
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: auto;
             position: relative;
         }
         </style>
@@ -48,7 +49,7 @@ if (isset($_POST['add'])) {
     <body>
 
         <section style=" padding: 0;">
-            <div class="container-fluid my-2" style="color: rgba(255,255,255,0.50); ;  ">
+            <div class="container-fluid my-2" style="background-color: rgba(255,255,255,0.50); ;  ">
                 <div class="row justify-content-center my-2 ">
                     <!-- column -->
                     <div class="col-md-4 my-4">
@@ -74,46 +75,87 @@ if (isset($_POST['add'])) {
                                             d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z">
                                         </path>
                                     </svg></div>
-                                <form class="text-center" method="post">
+                                <form method="post">
                                     <!-- <div class="column" style="border-style:solid; border-color:red;"> -->
                                     <!-- <div class="col-md-6 mb-3 " > -->
-                                    <div class="mb-3"> <input class="form-control" type="text" name="nom"
-                                            placeholder="Name" autofocus="on" autocomplete="on" inputmode="text"
-                                            required action=' '></div>
-                                    <div class="mb-3"> <input class="form-control" type="text" name="prenom"
-                                            placeholder="Last name" autocomplete="on" inputmode="text" required
-                                            action=' '> </div>
-                                    <!-- </div> -->
-                                    <!-- </div> -->
-                                    <div class="mb-3">
-                                        <select class="form-control" name="gender" id="gender">
-                                            <option value=" ">--Gender-- </option>
-                                            <option value="M">Male</option>
-                                            <option value="F">Female </option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="my-1 mx-2" for="nom">First name</label>
+                                                <input class="form-control" type="text" name="nom"
+                                                    placeholder="Your name" autofocus="on" autocomplete="on"
+                                                    inputmode="text" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="my-1 mx-2" for="prenom">Last name</label>
+                                                <input class="form-control" type="text" name="prenom"
+                                                    placeholder="Family name" autocomplete="on" inputmode="text" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3"><input class="form-control" type="date" name="date"
-                                            placeholder="Date of birth" inputmode="date" required action=' '></div>
-                                    <div class=" mb-3 "><input class="form-control" type="email" name="email"
-                                            placeholder="Email" autofocus="on" autocomplete="on" inputmode="email"
-                                            required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" action=' '></div>
-                                    <div class="mb-3"><input class="form-control" type="password" name="password"
+
+                                    <!-- </div> -->
+                                    <!-- </div> -->
+                                    <div class=" row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="my-1 mx-2 " for="gender"> Gender </label>
+                                                <select class="form-control" name="gender" id="gender">
+                                                    <option value=" ">--Gender-- </option>
+                                                    <option value="M">Male</option>
+                                                    <option value="F">Female </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="my-1 mx-2 " for="date"> Date of birth </label>
+                                                <input class="form-control" type="date" name="date"
+                                                    placeholder="Date of birth" inputmode="numeric" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" mb-3 ">
+                                        <label class="my-1 mx-2 " for="email"> Email </label>
+                                        <input class="form-control" type="email" name="email"
+                                            placeholder="example@example.com" autofocus="on" autocomplete="on"
+                                            inputmode="email" required
+                                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="my-1 mx-2 " for="password">Password </label>
+                                        <input class="form-control" type="password" name="password"
                                             placeholder="Password" minlength="7" required
-                                            title="Password must be 7 or more characters"></div>
-                                    <div class="mb-3"><input class="form-control" type="phone" name="phone"
-                                            placeholder="Phone" autocomplete="on"> </div>
-                                    <div class="mb-3"><input class="form-control" type="text" name="address"
-                                            placeholder="Address" autocomplete="on"> </div>
-                                    <div class="mb-3"><input class="form-control" type="file" name="photo"
+                                            title="Password must be 7 or more characters">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="my-1 mx-2 " for="phone">Phone Number</label>
+                                        <input class="form-control" type="phone" name="phone"
+                                        inputmode="tel"
+                                        placeholder="(+213) 66-66-66-66-6" autocomplete="on">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="my-1 mx-2 " for="address">Adress </label>
+
+                                        <input class="form-control" type="text" name="address" placeholder="Address"
+                                            autocomplete="on">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label class="my-1 mx-2 " for="photo">Profile Picture </label>    
+                                    <input class="form-control" type="file" name="photo"
                                             placeholder="Picture" autocomplete="on"> </div>
                                     <div class="mb-3" style="border-width: 0px;"><input
                                             class="btn btn-primary d-block w-100" value="Register" name="add"
                                             type="submit"
                                             style="background: #8aa5ad;border-radius: 8px;border-width: 0px;border-style: none;">
                                     </div>
-                                    <p style="color: rgb(70, 61, 58);"> Already a member?<a
-                                            style="color: #463d3a;text-decoration: underline;font-weight: bold;border: 0px none var(--bs-blue);"
-                                            href="../LoginPage.php"> Login</a>&nbsp; </p>
+                                    <div class="text-center " >
+                                        <p style="color: rgb(70, 61, 58);"> Already a member?<a
+                                                style="color: #463d3a;font-weight: bold;border: 0px none var(--bs-blue);"
+                                                href="../LoginPage.php"> Login</a>&nbsp; </p>
+                                    </div>
                                 </form>
                             </div>
                         </div>

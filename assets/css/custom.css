@@ -1,0 +1,52 @@
+:root {
+  --bg-primary: #e2dcde;
+  --bg-secondary: #191418;
+  --navBC: #e2dcde;
+  --bg-img: url("assets/img/subtle-prism.svg");
+  /* custom */
+  --sl-primary1: #3c4858;
+  --s1-secondary: #e2dcde;
+  --sl-primary: #8aa5ad;
+  --sl-info: #181720;
+  --sl-success: #5fac6c;
+  --sl-warning: #dc9c34;
+  --sl-danger: #f44336;
+}
+
+.dark-mode {
+  /* --bg-primary: #191418; */
+  --sl-primary1: #e2dcde;
+  --s1-secondary: #191418;
+  --bg-primary: #3c4858;
+  --navBC: #191418;
+  --bg-secondary: #e2dcde;
+
+  --bg-img: url("assets/img/subtle-prism-Dark.svg");
+}
+#mybody {
+  background-image: var(--bg-img);
+}
+
+#icon {
+  width: 30px;
+  cursor: pointer;
+}
+
+.nav-link {
+  color: var(--bg-secondary) !important;
+}
+
+.text-muted {
+  color: grey !important;
+}
+
+.mytheme {
+  background-color: var(--bg-primary) !important;
+  color: white !important;
+}
+
+.myButton {
+  background-color: var(--sl-success) !important;
+  border-color: #30a78b !important ;
+  color: white !important;
+}
