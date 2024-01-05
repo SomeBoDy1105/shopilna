@@ -1,8 +1,8 @@
 :root {
   --bg-primary: #e2dcde;
-  --bg-secondary: #191418;
+  --bg-secondary: #171717;
   --navBC: #e2dcde;
-  --bg-img: url("assets/img/subtle-prism.svg");
+  --bg-img: #fafafa;
   /* custom */
   --sl-primary1: #3c4858;
   --s1-secondary: #e2dcde;
@@ -15,16 +15,20 @@
 
 .dark-mode {
   /* --bg-primary: #191418; */
-  --sl-primary1: #e2dcde;
-  --s1-secondary: #191418;
-  --bg-primary: #3c4858;
-  --navBC: #191418;
-  --bg-secondary: #e2dcde;
+  --sl-primary1: #171717;
+  --s1-secondary: #FAFAFA;
+  --bg-primary: #373737;
+  --navBC: #373737;
+  --bg-secondary: #FBFBFB;
 
-  --bg-img: url("assets/img/subtle-prism-Dark.svg");
+  --bg-img: #171717;
 }
 #mybody {
-  background-image: var(--bg-img);
+  background-color: var(--bg-img);
+}
+
+#footerpad{
+  background-color: var(--navBC) !important;
 }
 
 #icon {

@@ -20,7 +20,7 @@
                                     class="fa fa-circle fa-stack-2x"></i><i
                                     class="fa fa-linkedin fa-stack-1x fa-inverse"></i></span></a></li>
                 </ul>
-                <p class="copyright text-muted text-center">Copyright © Shopilna 2023 | Web Design by Moustafa
+                <p class="copyright text-muted text-center">Copyright © Darna 2024 | Web Design by Moustafa
                     Loukarfi</p>
             </div>
         </div>

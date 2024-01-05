@@ -1,19 +1,22 @@
- <?php
+<?php
 try {
-
-    $access = new pdo("mysql:host=localhost;dbname=eshop;charset=utf8", "root", "");
+    $host = 'localhost';
+    $dbname = 'darna';
+    $username = 'root';
+    $passworddb = '';
+    global $access;
+    $access = new pdo("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $passworddb);
     $access->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 } catch (Exception $e) {
-    $e->getMessage();
+    echo "There was an error! " . $e->getMessage();
 }
-
 
 // $host = 'localhost';
 //     $dbname = 'eshop';
 // $username = 'root';
-// $password = '';
+// $passworddb = '';
 
-// $connection = mysqli_connect($host, $username, $password, $dbname);
+// $connection = mysqli_connect($host, $username, $passworddb, $dbname);
 
 // if (!$connection) {
 //     die("Connection failed: " . mysqli_connect_error());
@@ -24,5 +27,6 @@ try {
 // // Set error reporting to display warnings
 // mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+
+
 ?>
- 
