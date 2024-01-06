@@ -5,10 +5,10 @@ require("commandes.php");
 if (isset($_POST['login'])) {
     if (!empty($_POST['email']) and !empty($_POST['password'])) {
         $email = htmlspecialchars(strip_tags($_POST['email']));
-        $password = htmlspecialchars(strip_tags($_POST['password']));
+        $password = htmlspecialchars($_POST['password']);
 
         $user = checkUser($email, $password);
-        if ($user != false) {
+        if ($user) {
             $_SESSION['id'] = $user->id;
             $_SESSION['user'] = $user->nom;
             $_SESSION['prenom'] = $user->prenom;

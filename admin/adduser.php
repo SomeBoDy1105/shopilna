@@ -8,7 +8,7 @@ if (isset($_POST['add'])) {
                 $created_on = date("Y-m-d");
                 $role = strtoupper($_POST['role']);
                 $gender = strtoupper($_POST['gender']);
-                $newuser = ajouterUser($_POST['nom'], $_POST['prenom'], $gender, $_POST['date'], $_POST['email'], $_POST['password'], $role, $_POST['address'], $_POST['phone'],  $_POST['photo'],  $created_on);
+                $newuser = ajouterUser($_POST['nom'], $_POST['prenom'], $gender, $_POST['date'], $_POST['email'], $_POST['password'] , $role, $_POST['address'], $_POST['phone'],  $_POST['photo'],  $created_on);
                 if ($newuser) {
                     echo "<script>alert('User added successfully')</script>";
                 } else {
